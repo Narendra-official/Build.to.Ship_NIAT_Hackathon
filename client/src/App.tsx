@@ -14,6 +14,7 @@ import Portfolio from "./pages/Portfolio";
 import Lobby from "./pages/Lobby";
 import { AppProvider, useApp } from "./lib/store";
 import { Toaster } from "sonner";
+import { Analytics } from "@vercel/analytics/react";
 
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   const { user, loadingAuth } = useApp();
@@ -52,6 +53,7 @@ function App() {
           </Route>
         </Routes>
       </Router>
+      <Analytics />
     </AppProvider>
   );
 }
