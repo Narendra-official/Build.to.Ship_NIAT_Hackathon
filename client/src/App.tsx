@@ -8,6 +8,10 @@ import Analysis from "./pages/Analysis";
 import History from "./pages/History";
 import Settings from "./pages/Settings";
 import Profile from "./pages/Profile";
+import HardwareHealth from "./pages/HardwareHealth";
+import Offsets from "./pages/Offsets";
+import Portfolio from "./pages/Portfolio";
+import Lobby from "./pages/Lobby";
 import { AppProvider, useApp } from "./lib/store";
 import { Toaster } from "sonner";
 
@@ -34,11 +38,15 @@ function App() {
           <Route path="/" element={<LandingPage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/lobby" element={<Lobby />} />
           
           <Route element={<ProtectedRoute><Layout /></ProtectedRoute>}>
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/analysis" element={<Analysis />} />
             <Route path="/history" element={<History />} />
+            <Route path="/portfolio" element={<Portfolio />} />
+            <Route path="/hardware" element={<HardwareHealth />} />
+            <Route path="/offsets" element={<Offsets />} />
             <Route path="/settings" element={<Settings />} />
             <Route path="/profile" element={<Profile />} />
           </Route>

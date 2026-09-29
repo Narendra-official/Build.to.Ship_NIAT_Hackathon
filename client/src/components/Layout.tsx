@@ -1,5 +1,5 @@
 import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
-import { LayoutDashboard, Activity, History, Settings, LogOut, Building2, Moon, Sun, User as UserIcon, Menu, X } from "lucide-react";
+import { LayoutDashboard, Activity, History, Settings, LogOut, Building2, Moon, Sun, User as UserIcon, Menu, X, Wrench, Leaf, Map } from "lucide-react";
 import { useApp } from "../lib/store";
 import { useState } from "react";
 
@@ -17,7 +17,10 @@ export default function Layout() {
 
   const navItems = [
     { name: "Dashboard", path: "/dashboard", icon: LayoutDashboard },
+    { name: "Portfolio", path: "/portfolio", icon: Map },
     { name: "Analyses", path: "/analysis", icon: Activity },
+    { name: "Hardware", path: "/hardware", icon: Wrench },
+    { name: "Offsets", path: "/offsets", icon: Leaf },
     { name: "Reports", path: "/history", icon: History },
     { name: "Settings", path: "/settings", icon: Settings },
   ];
