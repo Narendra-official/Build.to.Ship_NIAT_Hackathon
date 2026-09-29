@@ -1,4 +1,4 @@
-import { Wrench, AlertTriangle, CheckCircle2, ShieldAlert, Cpu } from "lucide-react";
+import { Wrench, AlertTriangle, CheckCircle2, ShieldAlert } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "../components/ui/Card";
 
 export default function HardwareHealth() {

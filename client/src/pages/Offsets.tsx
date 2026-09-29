@@ -1,4 +1,4 @@
-import { Leaf, ArrowRight, TreePine, Sun, Wind } from "lucide-react";
+import { Leaf, TreePine, Sun, Wind } from "lucide-react";
 import { Card, CardContent } from "../components/ui/Card";
 import { Button } from "../components/ui/Button";
 
