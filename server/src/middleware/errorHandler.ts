@@ -11,22 +11,15 @@ export const errorHandler = (
   if (err instanceof AppError) {
     return res.status(err.statusCode).json({
       success: false,
-      error: {
-        code: err.code,
-        message: err.message,
-        details: err.details
-      }
+      error: err.message
     });
   }
 
   if (err instanceof ZodError) {
+    const messages = err.issues.map(i => i.message).join(', ');
     return res.status(400).json({
       success: false,
-      error: {
-        code: 'VALIDATION_ERROR',
-        message: 'Invalid input',
-        details: err.issues
-      }
+      error: `Validation Error: ${messages}`
     });
   }
 
@@ -34,9 +27,6 @@ export const errorHandler = (
 
   return res.status(500).json({
     success: false,
-    error: {
-      code: 'INTERNAL_SERVER_ERROR',
-      message: 'An unexpected error occurred'
-    }
+    error: 'An unexpected error occurred'
   });
 };

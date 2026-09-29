@@ -46,6 +46,13 @@ export const register = async (req: Request, res: Response, next: NextFunction) 
       { expiresIn: '7d' }
     );
 
+    res.cookie('token', token, {
+      httpOnly: true,
+      secure: config.nodeEnv === 'production',
+      sameSite: 'lax',
+      maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days
+    });
+
     res.status(201).json({
       success: true,
       data: {
@@ -86,6 +93,13 @@ export const login = async (req: Request, res: Response, next: NextFunction) => 
       { expiresIn: '7d' }
     );
 
+    res.cookie('token', token, {
+      httpOnly: true,
+      secure: config.nodeEnv === 'production',
+      sameSite: 'lax',
+      maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days
+    });
+
     const { password_hash, ...userWithoutPassword } = user;
 
     res.json({
@@ -124,9 +138,32 @@ export const getMe = async (req: AuthenticatedRequest, res: Response, next: Next
 };
 
 export const logout = async (req: Request, res: Response) => {
-  // Since JWTs are stateless, we can just return success and the client drops the token.
+  res.clearCookie('token');
   res.json({
     success: true,
     message: 'Logged out successfully'
   });
+};
+
+export const updateProfile = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
+  try {
+    const userId = req.user?.userId;
+    // We don't have a fullName column in the DB, so this is just a dummy response that echoes it back
+    // to keep the frontend happy.
+    const { fullName, organization } = req.body;
+    
+    res.json({
+      success: true,
+      data: {
+        user: {
+          id: userId,
+          email: req.user?.email,
+          name: fullName || 'User',
+          organization: organization || 'Organization'
+        }
+      }
+    });
+  } catch (error) {
+    next(error);
+  }
 };

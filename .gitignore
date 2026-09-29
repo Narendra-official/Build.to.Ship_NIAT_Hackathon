@@ -1,12 +1,52 @@
+# Environment / secrets
 .env
 .env.*
 !.env.example
-server/.env
-client/.env
 **/.env
 **/.env.*
+server/.env
+client/.env
+
+# Dependencies
 node_modules/
+
+# Build output
 dist/
 build/
-coverage/
+.next/
+out/
+
+# Logs
 *.log
+logs/
+
+# Coverage
+coverage/
+
+# Caches
+.cache/
+.vite/
+.npm/
+.eslintcache
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE / editor files
+.vscode/
+.idea/
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# Local database / generated files
+*.db
+*.sqlite
+*.sqlite3
+
+# Other generated artifacts
+*.bak
+*.swp

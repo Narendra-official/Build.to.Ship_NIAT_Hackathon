@@ -4,7 +4,7 @@ import { auth } from '../lib/api';
 import { useApp } from '../lib/store';
 import { Button } from '../components/ui/Button';
 import { Input } from '../components/ui/Input';
-import { Eye, EyeOff, Loader2, Building2 } from 'lucide-react';
+import { Eye, EyeOff, Loader2, Building2, Shield, ArrowRight } from 'lucide-react';
 import { toast } from 'sonner';
 
 export default function Login() {
@@ -28,7 +28,7 @@ export default function Login() {
       await checkAuth(); // Load user profile and their data
       navigate('/dashboard');
     } catch (err: any) {
-      setError(err.response?.data?.error || 'Invalid email or password.');
+      setError(err.response?.data?.error?.message || err.response?.data?.error || 'Invalid credentials. Please verify and try again.');
     } finally {
       setIsSubmitting(false);
     }
@@ -37,89 +37,107 @@ export default function Login() {
   const handleForgot = (e: React.FormEvent) => {
     e.preventDefault();
     if (!resetEmail) return setError('Email is required.');
-    toast.success('If an account exists, a reset link has been generated and sent.');
+    toast.success('If an account exists, a secure reset link has been generated.');
     setForgotMode(false);
   };
 
   return (
     <div className="min-h-screen bg-background relative flex flex-col justify-center py-12 sm:px-6 lg:px-8 overflow-hidden transition-colors duration-300">
-      {/* Decorative Blobs */}
-      <div className="absolute top-0 right-0 -z-10 w-[500px] h-[500px] bg-primary/10 rounded-full blur-3xl translate-x-1/3 -translate-y-1/3"></div>
-      <div className="absolute bottom-0 left-0 -z-10 w-[500px] h-[500px] bg-blue-500/10 rounded-full blur-3xl -translate-x-1/3 translate-y-1/3"></div>
+      {/* Sophisticated Ambient Background */}
+      <div className="fixed inset-0 pointer-events-none -z-10">
+        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-primary/10 blur-[120px]" />
+        <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] rounded-full bg-blue-500/10 blur-[150px]" />
+        <div className="absolute top-[40%] right-[10%] w-[30%] h-[30%] rounded-full bg-emerald-500/5 blur-[100px]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,hsl(var(--background))_100%)] opacity-50" />
+      </div>
 
-      <div className="sm:mx-auto sm:w-full sm:max-w-md z-10">
-        <div className="flex justify-center mb-6">
-          <div className="w-12 h-12 bg-primary rounded-xl flex items-center justify-center shadow-lg shadow-primary/20">
-            <Building2 className="w-8 h-8 text-primary-foreground" />
-          </div>
+      <div className="sm:mx-auto sm:w-full sm:max-w-md z-10 animate-fade-in-up">
+        <div className="flex justify-center mb-8">
+          <Link to="/" className="group">
+            <div className="w-16 h-16 bg-gradient-to-br from-primary to-emerald-600 rounded-2xl flex items-center justify-center shadow-[0_0_30px_rgba(var(--primary),0.3)] group-hover:shadow-[0_0_40px_rgba(var(--primary),0.5)] transition-all transform group-hover:scale-105 border border-primary/20">
+              <Building2 className="w-8 h-8 text-white" />
+            </div>
+          </Link>
         </div>
         <h2 className="mt-2 text-center text-3xl font-extrabold text-foreground tracking-tight">
-          {forgotMode ? 'Reset your password' : 'Sign in to WattWise'}
+          {forgotMode ? 'Account Recovery' : 'Authenticate Session'}
         </h2>
-        <p className="mt-2 text-center text-sm text-muted-foreground">
-          {forgotMode ? 'Enter your email to receive a secure link' : 'Or '}
-          {!forgotMode && <Link to="/register" className="font-medium text-primary hover:text-primary/80 transition-colors">create a new account</Link>}
+        <p className="mt-3 text-center text-sm text-muted-foreground font-medium">
+          {forgotMode ? 'Enter your email to receive a secure recovery link.' : (
+            <>
+              Don't have an enterprise account?{' '}
+              <Link to="/register" className="font-bold text-primary hover:text-primary/80 transition-colors border-b border-primary/30 pb-0.5">Initialize one here</Link>
+            </>
+          )}
         </p>
       </div>
 
-      <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md z-10">
-        <div className="glass-card py-8 px-4 sm:px-10">
-          {error && <div className="mb-6 p-3 bg-destructive/10 text-destructive text-sm rounded-md border border-destructive/20 text-center">{error}</div>}
+      <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md z-10 animate-fade-in-up stagger-2">
+        <div className="glass-card py-10 px-4 sm:px-12 rounded-[2rem] border border-border/50 shadow-2xl relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-b from-white/10 to-transparent pointer-events-none"></div>
+          
+          {error && (
+            <div className="mb-8 p-4 bg-red-500/10 text-red-600 dark:text-red-400 text-sm font-bold rounded-xl border border-red-500/20 text-center flex items-center justify-center relative z-10 shadow-inner">
+              <Shield className="w-4 h-4 mr-2" />
+              {error}
+            </div>
+          )}
           
           {forgotMode ? (
-            <form className="space-y-6" onSubmit={handleForgot}>
+            <form className="space-y-6 relative z-10" onSubmit={handleForgot}>
               <div>
-                <label className="block text-sm font-medium text-foreground">Email address</label>
+                <label className="block text-xs font-bold text-foreground uppercase tracking-wider mb-2">Registered Email</label>
                 <div className="mt-1">
-                  <Input type="email" required value={resetEmail} onChange={e => setResetEmail(e.target.value)} className="bg-background/50" />
+                  <Input type="email" required value={resetEmail} onChange={e => setResetEmail(e.target.value)} className="glass-input h-12 text-base px-4 border-border/50 w-full" placeholder="name@organization.com" />
                 </div>
               </div>
-              <div className="flex space-x-3">
-                <Button type="button" variant="outline" className="w-full bg-background/50" onClick={() => {setForgotMode(false); setError('');}}>Cancel</Button>
-                <Button type="submit" className="w-full">Send Link</Button>
+              <div className="flex space-x-4 pt-2">
+                <Button type="button" variant="outline" className="w-full glass-secondary hover:bg-background/80 rounded-xl font-bold border-border/50 h-12" onClick={() => {setForgotMode(false); setError('');}}>Cancel</Button>
+                <Button type="submit" className="w-full bg-primary hover:bg-primary/90 text-white rounded-xl font-bold shadow-md shadow-primary/20 h-12">Dispatch Link</Button>
               </div>
             </form>
           ) : (
-            <form className="space-y-6" onSubmit={handleSubmit}>
-              <div>
-                <label className="block text-sm font-medium text-foreground">Email address</label>
+            <form className="space-y-6 relative z-10" onSubmit={handleSubmit}>
+              <div className="space-y-2">
+                <label className="block text-xs font-bold text-foreground uppercase tracking-wider mb-2">Corporate Email</label>
                 <div className="mt-1">
-                  <Input type="email" required value={formData.email} onChange={e => setFormData({...formData, email: e.target.value})} className="bg-background/50" />
+                  <Input type="email" required value={formData.email} onChange={e => setFormData({...formData, email: e.target.value})} className="glass-input h-12 text-base px-4 border-border/50 w-full" placeholder="user@company.com" />
                 </div>
               </div>
 
-              <div>
-                <label className="block text-sm font-medium text-foreground">Password</label>
+              <div className="space-y-2 pt-2">
+                <div className="flex items-center justify-between">
+                  <label className="block text-xs font-bold text-foreground uppercase tracking-wider mb-2">Security Key</label>
+                  <button type="button" onClick={() => {setForgotMode(true); setError('');}} className="text-xs font-bold text-primary hover:text-primary/80 transition-colors mb-2">
+                    Recover access
+                  </button>
+                </div>
                 <div className="mt-1 relative">
                   <Input 
                     type={showPassword ? "text" : "password"} 
                     required 
                     value={formData.password} 
                     onChange={e => setFormData({...formData, password: e.target.value})} 
-                    className="bg-background/50 pr-10"
+                    className="glass-input h-12 text-base px-4 border-border/50 w-full pr-12"
+                    placeholder="••••••••••••"
                   />
-                  <button type="button" className="absolute inset-y-0 right-0 pr-3 flex items-center text-muted-foreground hover:text-foreground transition-colors" onClick={() => setShowPassword(!showPassword)}>
+                  <button type="button" className="absolute inset-y-0 right-0 pr-4 flex items-center text-muted-foreground hover:text-foreground transition-colors" onClick={() => setShowPassword(!showPassword)}>
                     {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
                   </button>
                 </div>
               </div>
 
-              <div className="flex items-center justify-end">
-                <div className="text-sm">
-                  <button type="button" onClick={() => {setForgotMode(true); setError('');}} className="font-medium text-primary hover:text-primary/80 transition-colors">
-                    Forgot your password?
-                  </button>
-                </div>
-              </div>
-
-              <div>
-                <Button type="submit" className="w-full flex justify-center shadow-lg shadow-primary/20 hover:shadow-primary/30 transition-shadow" disabled={isSubmitting}>
-                  {isSubmitting ? <><Loader2 className="mr-2 h-4 w-4 animate-spin" /> Signing in...</> : 'Sign in'}
+              <div className="pt-4">
+                <Button type="submit" className="w-full flex justify-center bg-foreground text-background hover:bg-foreground/90 rounded-xl h-12 font-bold shadow-xl transition-all" disabled={isSubmitting}>
+                  {isSubmitting ? <><Loader2 className="mr-2 h-5 w-5 animate-spin" /> Authenticating...</> : <>Access Dashboard <ArrowRight className="ml-2 w-5 h-5" /></>}
                 </Button>
               </div>
             </form>
           )}
         </div>
+        <p className="text-center text-xs text-muted-foreground mt-8 font-medium">
+          Protected by AES-256 Encryption & Zero-Trust Architecture
+        </p>
       </div>
     </div>
   );

@@ -197,7 +197,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       setUser(res.user);
       toast.success('Profile updated successfully.');
     } catch (e: any) {
-      toast.error(e.response?.data?.error || 'Failed to update profile');
+      toast.error(e.response?.data?.error?.message || e.response?.data?.error || 'Failed to update profile');
       throw e;
     }
   };
@@ -216,7 +216,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         impact: `Est. -${response.result?.estimatedCO2Reduction}t CO2`
       }, ...prev]);
     } catch (err: any) {
-      toast.error(err.response?.data?.error || err.message || 'Analysis failed.');
+      toast.error(err.response?.data?.error?.message || err.response?.data?.error || err.message || 'Analysis failed.');
       throw err;
     }
   };
@@ -227,7 +227,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       setAnalyses(prev => prev.filter(a => a.id !== id));
       toast.success('Analysis deleted.');
     } catch (err: any) {
-      toast.error(err.response?.data?.error || 'Failed to delete analysis');
+      toast.error(err.response?.data?.error?.message || err.response?.data?.error || 'Failed to delete analysis');
     }
   };
 
