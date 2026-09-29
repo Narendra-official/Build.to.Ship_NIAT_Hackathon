@@ -44,18 +44,16 @@ export default function Login() {
   return (
     <div className="min-h-screen bg-background relative flex flex-col justify-center py-12 sm:px-6 lg:px-8 overflow-hidden transition-colors duration-300">
       {/* Sophisticated Ambient Background */}
-      <div className="fixed inset-0 pointer-events-none -z-10">
-        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-primary/10 blur-[120px]" />
-        <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] rounded-full bg-blue-500/10 blur-[150px]" />
-        <div className="absolute top-[40%] right-[10%] w-[30%] h-[30%] rounded-full bg-emerald-500/5 blur-[100px]" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,hsl(var(--background))_100%)] opacity-50" />
+      <div className="fixed inset-0 pointer-events-none -z-10 bg-background/50">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(var(--primary),0.03)_0%,transparent_50%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,rgba(0,0,0,0.02)_0%,transparent_50%)] dark:bg-[radial-gradient(ellipse_at_bottom_left,rgba(255,255,255,0.02)_0%,transparent_50%)]" />
       </div>
 
       <div className="sm:mx-auto sm:w-full sm:max-w-md z-10 animate-fade-in-up">
         <div className="flex justify-center mb-8">
           <Link to="/" className="group">
-            <div className="w-16 h-16 bg-gradient-to-br from-primary to-emerald-600 rounded-2xl flex items-center justify-center shadow-[0_0_30px_rgba(var(--primary),0.3)] group-hover:shadow-[0_0_40px_rgba(var(--primary),0.5)] transition-all transform group-hover:scale-105 border border-primary/20">
-              <Building2 className="w-8 h-8 text-white" />
+            <div className="w-14 h-14 bg-primary rounded-2xl flex items-center justify-center shadow-sm shadow-primary/20 transition-all transform group-hover:scale-105 border border-primary/20">
+              <Building2 className="w-6 h-6 text-primary-foreground" />
             </div>
           </Link>
         </div>
@@ -73,8 +71,8 @@ export default function Login() {
       </div>
 
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md z-10 animate-fade-in-up stagger-2">
-        <div className="glass-card py-10 px-4 sm:px-12 rounded-[2rem] border border-border/50 shadow-2xl relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-b from-white/10 to-transparent pointer-events-none"></div>
+        <div className="glass-card py-10 px-4 sm:px-12 rounded-3xl border border-border/60 shadow-xl relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-b from-white/5 to-transparent pointer-events-none"></div>
           
           {error && (
             <div className="mb-8 p-4 bg-red-500/10 text-red-600 dark:text-red-400 text-sm font-bold rounded-xl border border-red-500/20 text-center flex items-center justify-center relative z-10 shadow-inner">

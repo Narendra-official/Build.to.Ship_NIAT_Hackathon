@@ -47,10 +47,10 @@ export default function Dashboard() {
         </div>
         <Button 
           size="lg" 
-          className="shrink-0 group shadow-[0_0_20px_rgba(var(--primary),0.3)] hover:shadow-[0_0_30px_rgba(var(--primary),0.5)] transition-all duration-300 rounded-full px-8 bg-gradient-to-r from-primary to-emerald-600 hover:from-primary/90 hover:to-emerald-500" 
+          className="shrink-0 group shadow-sm transition-all duration-300" 
           onClick={() => setModalOpen(true)}
         >
-          <Plus className="w-5 h-5 mr-2 transition-transform group-hover:rotate-180 duration-500" />
+          <Plus className="w-5 h-5 mr-2 transition-transform group-hover:rotate-90 duration-300" />
           <span className="font-semibold text-white">New Analysis</span>
         </Button>
       </div>
@@ -61,127 +61,116 @@ export default function Dashboard() {
 
       {/* Primary Impact Metric */}
       <div className="stagger-2">
-        <div className="relative overflow-hidden rounded-[2rem] p-[1px] bg-gradient-to-b from-primary/50 to-transparent shadow-2xl shadow-primary/10">
-          <div className="absolute inset-0 bg-primary/5 blur-3xl rounded-full transform -translate-y-1/2"></div>
-          <div className="relative bg-background/80 backdrop-blur-2xl rounded-[calc(2rem-1px)] p-8 sm:p-10 flex flex-col md:flex-row items-center justify-between gap-8 overflow-hidden">
-            <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-gradient-to-br from-emerald-500/20 to-blue-500/10 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/3 pointer-events-none"></div>
-            
-            <div className="flex-1 space-y-4 z-10">
-              <div className="flex items-center space-x-3">
-                <div className="p-3 bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 rounded-2xl shadow-inner border border-emerald-500/30">
-                  <Leaf className="w-8 h-8" />
-                </div>
-                <h2 className="text-xl font-semibold text-muted-foreground uppercase tracking-wider">Total CO₂ Impact Avoided</h2>
+        <div className="glass-panel relative overflow-hidden p-8 sm:p-10 flex flex-col md:flex-row items-center justify-between gap-8 border border-border/60">
+          <div className="flex-1 space-y-4 z-10">
+            <div className="flex items-center space-x-3">
+              <div className="p-2.5 bg-primary/10 text-primary rounded-xl border border-primary/20">
+                <Leaf className="w-6 h-6" />
               </div>
-              <div className="flex items-baseline space-x-3">
-                <span className="text-6xl sm:text-7xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-br from-emerald-600 to-emerald-400 dark:from-emerald-400 dark:to-emerald-200 drop-shadow-sm">
-                  {co2Impact}
-                </span>
-                <span className="text-2xl font-bold text-muted-foreground">tons</span>
-              </div>
-              <p className="text-sm font-medium text-muted-foreground/80 flex items-center">
-                <span className="text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 px-2 py-1 rounded-md mr-2 flex items-center font-bold">
-                  <TrendingUp className="w-4 h-4 mr-1" /> 12.4%
-                </span>
-                improvement vs previous period
-              </p>
+              <h2 className="text-sm font-semibold text-muted-foreground tracking-wide uppercase">Total CO₂ Impact Avoided</h2>
             </div>
-            
-            <div className="w-full md:w-1/3 z-10 bg-background/50 backdrop-blur-md rounded-2xl p-6 border border-border/50 shadow-inner">
-              <div className="flex justify-between items-center mb-4">
-                <span className="text-sm font-semibold text-muted-foreground">Reduction Goal Progress</span>
-                <span className="text-sm font-bold text-primary">68%</span>
-              </div>
-              <div className="h-3 w-full bg-secondary rounded-full overflow-hidden shadow-inner">
-                <div className="h-full bg-gradient-to-r from-primary to-emerald-400 w-[68%] rounded-full shadow-[0_0_10px_rgba(var(--primary),0.5)]"></div>
-              </div>
-              <p className="text-xs text-muted-foreground mt-4 text-center">On track to meet annual sustainability targets.</p>
+            <div className="flex items-baseline space-x-3">
+              <span className="text-6xl sm:text-7xl font-semibold tracking-tight text-foreground">
+                {co2Impact}
+              </span>
+              <span className="text-2xl font-medium text-muted-foreground">tons</span>
             </div>
+            <p className="text-sm font-medium text-muted-foreground flex items-center">
+              <span className="text-primary bg-primary/10 px-2 py-0.5 rounded-md mr-2 flex items-center font-semibold text-xs">
+                <TrendingUp className="w-3.5 h-3.5 mr-1" /> 12.4%
+              </span>
+              improvement vs previous period
+            </p>
+          </div>
+          
+          <div className="w-full md:w-1/3 z-10 bg-background/50 rounded-2xl p-6 border border-border/50 shadow-sm">
+            <div className="flex justify-between items-center mb-4">
+              <span className="text-sm font-semibold text-muted-foreground">Reduction Goal Progress</span>
+              <span className="text-sm font-semibold text-primary">68%</span>
+            </div>
+            <div className="h-2 w-full bg-secondary rounded-full overflow-hidden">
+              <div className="h-full bg-primary w-[68%] rounded-full transition-all duration-1000 ease-out"></div>
+            </div>
+            <p className="text-xs text-muted-foreground mt-4 text-center">On track to meet annual sustainability targets.</p>
           </div>
         </div>
       </div>
 
       {/* Secondary Metrics */}
       <div className="grid gap-6 md:grid-cols-3 stagger-3">
-        <Card className="glass-card hover:-translate-y-1 hover:shadow-lg transition-all duration-300 border-t-4 border-t-blue-500">
-          <CardContent className="p-6">
-            <div className="flex items-center justify-between mb-4">
-              <p className="text-sm font-bold text-muted-foreground uppercase tracking-wider">Energy Usage</p>
-              <div className="bg-blue-500/10 p-2.5 rounded-xl border border-blue-500/20 text-blue-500">
-                <Zap className="h-5 w-5" />
+        <Card className="glass-card flex flex-col p-6 space-y-4">
+          <div className="flex items-center justify-between">
+            <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Energy Usage</p>
+            <div className="bg-foreground/5 p-2 rounded-lg text-foreground/70">
+              <Zap className="h-4 w-4" />
+            </div>
+          </div>
+          <div>
+            <div className="text-3xl font-semibold text-foreground tracking-tight">{energyMWh} <span className="text-lg font-medium text-muted-foreground">MWh</span></div>
+            {analyses.length > 1 && (
+              <div className="mt-2 flex items-center text-sm font-medium">
+                <span className="text-primary flex items-center mr-2">
+                  <TrendingDown className="mr-1 h-3.5 w-3.5" /> 8.4%
+                </span>
+                <span className="text-muted-foreground">vs previous</span>
               </div>
-            </div>
-            <div>
-              <div className="text-4xl font-extrabold text-foreground tracking-tight">{energyMWh} <span className="text-xl font-medium text-muted-foreground">MWh</span></div>
-              {analyses.length > 1 && (
-                <div className="mt-4 flex items-center text-sm font-medium">
-                  <span className="text-emerald-600 dark:text-emerald-400 flex items-center bg-emerald-500/10 px-2 py-1 rounded-md mr-2">
-                    <TrendingDown className="mr-1 h-4 w-4" /> 8.4%
-                  </span>
-                  <span className="text-muted-foreground ml-2">vs previous</span>
-                </div>
-              )}
-            </div>
-          </CardContent>
+            )}
+          </div>
         </Card>
         
-        <Card className="glass-card hover:-translate-y-1 hover:shadow-lg transition-all duration-300 border-t-4 border-t-cyan-500">
-          <CardContent className="p-6">
-            <div className="flex items-center justify-between mb-4">
-              <p className="text-sm font-bold text-muted-foreground uppercase tracking-wider">Water Usage</p>
-              <div className="bg-cyan-500/10 p-2.5 rounded-xl border border-cyan-500/20 text-cyan-500">
-                <Droplets className="h-5 w-5" />
+        <Card className="glass-card flex flex-col p-6 space-y-4">
+          <div className="flex items-center justify-between">
+            <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Water Usage</p>
+            <div className="bg-foreground/5 p-2 rounded-lg text-foreground/70">
+              <Droplets className="h-4 w-4" />
+            </div>
+          </div>
+          <div>
+            <div className="text-3xl font-semibold text-foreground tracking-tight">{waterKL} <span className="text-lg font-medium text-muted-foreground">kL</span></div>
+            {analyses.length > 1 && (
+              <div className="mt-2 flex items-center text-sm font-medium">
+                <span className="text-primary flex items-center mr-2">
+                  <TrendingDown className="mr-1 h-3.5 w-3.5" /> 4.2%
+                </span>
+                <span className="text-muted-foreground">vs previous</span>
               </div>
-            </div>
-            <div>
-              <div className="text-4xl font-extrabold text-foreground tracking-tight">{waterKL} <span className="text-xl font-medium text-muted-foreground">kL</span></div>
-              {analyses.length > 1 && (
-                <div className="mt-4 flex items-center text-sm font-medium">
-                  <span className="text-emerald-600 dark:text-emerald-400 flex items-center bg-emerald-500/10 px-2 py-1 rounded-md mr-2">
-                    <TrendingDown className="mr-1 h-4 w-4" /> 4.2%
-                  </span>
-                  <span className="text-muted-foreground ml-2">vs previous</span>
-                </div>
-              )}
-            </div>
-          </CardContent>
+            )}
+          </div>
         </Card>
 
-        <Card className="glass-card hover:-translate-y-1 hover:shadow-lg transition-all duration-300 border-t-4 border-t-amber-500">
-          <CardContent className="p-6">
-            <div className="flex items-center justify-between mb-4">
-              <p className="text-sm font-bold text-muted-foreground uppercase tracking-wider">Waste Gen</p>
-              <div className="bg-amber-500/10 p-2.5 rounded-xl border border-amber-500/20 text-amber-500">
-                <Trash2 className="h-5 w-5" />
+        <Card className="glass-card flex flex-col p-6 space-y-4">
+          <div className="flex items-center justify-between">
+            <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Waste Gen</p>
+            <div className="bg-foreground/5 p-2 rounded-lg text-foreground/70">
+              <Trash2 className="h-4 w-4" />
+            </div>
+          </div>
+          <div>
+            <div className="text-3xl font-semibold text-foreground tracking-tight">{wasteTons} <span className="text-lg font-medium text-muted-foreground">tons</span></div>
+            {analyses.length > 1 && (
+              <div className="mt-2 flex items-center text-sm font-medium">
+                <span className="text-red-500 flex items-center mr-2">
+                  <TrendingUp className="mr-1 h-3.5 w-3.5" /> 1.5%
+                </span>
+                <span className="text-muted-foreground">vs previous</span>
               </div>
-            </div>
-            <div>
-              <div className="text-4xl font-extrabold text-foreground tracking-tight">{wasteTons} <span className="text-xl font-medium text-muted-foreground">tons</span></div>
-              {analyses.length > 1 && (
-                <div className="mt-4 flex items-center text-sm font-medium">
-                  <span className="text-red-500 flex items-center bg-red-500/10 px-2 py-1 rounded-md mr-2">
-                    <TrendingUp className="mr-1 h-4 w-4" /> 1.5%
-                  </span>
-                  <span className="text-muted-foreground ml-2">vs previous</span>
-                </div>
-              )}
-            </div>
-          </CardContent>
+            )}
+          </div>
         </Card>
       </div>
 
       {/* Main Insights & Trends */}
       <div className="grid gap-6 lg:grid-cols-3 stagger-4">
         {/* Main Trend Visualization */}
-        <Card className="lg:col-span-2 glass-elevated flex flex-col border border-border/50 shadow-xl overflow-hidden rounded-[1.5rem]">
-          <div className="px-6 py-5 border-b border-border/50 bg-background/40 flex justify-between items-center">
+        <Card className="lg:col-span-2 glass-card flex flex-col border border-border/50 shadow-sm overflow-hidden">
+          <div className="px-6 py-5 border-b border-border/40 bg-foreground/5 flex justify-between items-center">
             <div>
-              <CardTitle className="text-lg font-bold text-foreground">Resource Trends</CardTitle>
-              <CardDescription className="mt-1 font-medium">Historical consumption analysis over time</CardDescription>
+              <CardTitle className="text-base font-semibold text-foreground">Resource Trends</CardTitle>
+              <CardDescription className="text-xs mt-0.5">Historical consumption analysis over time</CardDescription>
             </div>
             <div className="flex space-x-2">
-              <span className="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-semibold bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20">Electricity</span>
-              <span className="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-semibold bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 border border-cyan-500/20">Water</span>
+              <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium text-muted-foreground bg-background border border-border">Electricity</span>
+              <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium text-muted-foreground bg-background border border-border">Water</span>
             </div>
           </div>
           <CardContent className="p-6 flex-1 flex flex-col min-h-[350px]">
@@ -232,49 +221,44 @@ export default function Dashboard() {
         </Card>
         
         {/* AI Insight Panel */}
-        <Card className="glass-panel flex flex-col relative overflow-hidden border border-primary/20 shadow-lg group">
-          <div className="absolute inset-0 bg-gradient-to-b from-primary/10 to-transparent opacity-50 pointer-events-none"></div>
-          
-          <div className="px-6 py-5 border-b border-primary/20 bg-primary/5 z-10 flex items-center justify-between">
-            <div className="flex items-center space-x-3">
-              <div className="relative">
-                <AlertCircle className="w-5 h-5 text-primary" />
-                <span className="absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full animate-pulse border border-background"></span>
-              </div>
-              <CardTitle className="text-lg font-bold text-foreground tracking-tight">AI Insights</CardTitle>
+        <Card className="glass-card flex flex-col overflow-hidden border border-border/60 shadow-sm group">
+          <div className="px-5 py-4 border-b border-border/40 bg-primary/5 flex items-center justify-between">
+            <div className="flex items-center space-x-2">
+              <div className="w-2 h-2 rounded-full bg-primary animate-pulse"></div>
+              <CardTitle className="text-sm font-semibold text-foreground tracking-tight">AI Insights</CardTitle>
             </div>
-            <span className="text-xs font-bold uppercase tracking-wider text-primary bg-primary/10 px-2 py-1 rounded">Live</span>
+            <span className="text-[10px] font-semibold uppercase tracking-wider text-primary">Live Data</span>
           </div>
           
           <CardContent className="p-0 flex-1 flex flex-col z-10">
             <div className="overflow-y-auto max-h-[400px] custom-scrollbar p-4 space-y-4">
               {latestAnalysis?.result?.aiRecommendations?.map((rec, i) => (
-                <div key={i} className="p-5 rounded-2xl border border-border/60 bg-background/80 backdrop-blur-md shadow-sm hover:shadow-md hover:border-primary/50 transition-all duration-300">
+                <div key={i} className="p-4 rounded-xl border border-border bg-background/50 backdrop-blur-sm shadow-sm transition-all hover:bg-background">
                   <div className="flex justify-between items-start mb-3">
-                    <h4 className="font-bold text-sm text-foreground">Actionable Recommendation</h4>
-                    <span className="bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 text-xs font-bold px-2 py-1 rounded-md border border-emerald-500/20">High Impact</span>
+                    <h4 className="font-semibold text-sm text-foreground">Recommendation</h4>
+                    <span className="text-primary text-[10px] font-semibold uppercase tracking-wider px-1.5 py-0.5 bg-primary/10 rounded">Actionable</span>
                   </div>
                   
-                  <div className="space-y-4">
+                  <div className="space-y-3">
                     <div>
-                      <p className="text-xs font-bold text-muted-foreground uppercase tracking-wider mb-1">Issue Detected</p>
-                      <p className="text-sm font-medium text-red-600 dark:text-red-400 bg-red-500/10 px-3 py-2 rounded-lg border border-red-500/20">
+                      <p className="text-[10px] font-semibold text-muted-foreground uppercase tracking-wider mb-1">Issue</p>
+                      <p className="text-xs text-foreground/80">
                         {latestAnalysis.result?.sustainabilityProblems?.[0] || 'Suboptimal resource allocation detected.'}
                       </p>
                     </div>
                     
                     <div>
-                      <p className="text-xs font-bold text-muted-foreground uppercase tracking-wider mb-1">Proposed Solution</p>
+                      <p className="text-[10px] font-semibold text-muted-foreground uppercase tracking-wider mb-1">Solution</p>
                       <p className="text-sm font-medium text-foreground leading-relaxed">{rec}</p>
                     </div>
 
-                    <div className="pt-4 mt-2 border-t border-border/50 flex items-center justify-between">
+                    <div className="pt-3 mt-3 border-t border-border/40 flex items-center justify-between">
                       <div>
-                        <p className="text-xs font-bold text-muted-foreground uppercase tracking-wider">Est. Savings</p>
-                        <p className="text-base font-bold text-emerald-600 dark:text-emerald-400">${latestAnalysis.result?.estimatedCostSavings}</p>
+                        <p className="text-[10px] font-semibold text-muted-foreground uppercase tracking-wider">Est. Savings</p>
+                        <p className="text-sm font-semibold text-primary">${latestAnalysis.result?.estimatedCostSavings}</p>
                       </div>
-                      <Button size="sm" className="rounded-full shadow-md bg-foreground text-background hover:bg-foreground/90 transition-all group/btn" onClick={() => setScheduleModalRec(rec)}>
-                        Apply <ArrowRight className="w-3 h-3 ml-2 transition-transform group-hover/btn:translate-x-1" />
+                      <Button size="sm" variant="secondary" className="rounded-lg text-xs h-8 group/btn" onClick={() => setScheduleModalRec(rec)}>
+                        Apply <ArrowRight className="w-3 h-3 ml-1.5 transition-transform group-hover/btn:translate-x-0.5" />
                       </Button>
                     </div>
                   </div>
@@ -321,7 +305,7 @@ export default function Dashboard() {
                       </td>
                       <td className="px-6 py-4">
                         <div className="text-xs text-muted-foreground line-through opacity-70 mb-1">{app.previousSchedule}</div>
-                        <div className="text-emerald-600 dark:text-emerald-400 font-semibold text-sm bg-emerald-500/10 inline-block px-2 py-0.5 rounded border border-emerald-500/20">{app.proposedSchedule}</div>
+                        <div className="text-foreground font-medium text-sm">{app.proposedSchedule}</div>
                       </td>
                       <td className="px-6 py-4 text-right">
                         {app.status === 'Pending Approval' && <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20 shadow-sm">Pending</span>}

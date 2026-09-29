@@ -13,17 +13,17 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       <button
         ref={ref}
         className={cn(
-          "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
+          "inline-flex items-center justify-center whitespace-nowrap rounded-xl text-sm font-semibold ring-offset-background transition-all duration-300 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 active:scale-[0.98]",
           {
-            "bg-primary text-primary-foreground hover:bg-primary/90": variant === "default",
-            "bg-destructive text-destructive-foreground hover:bg-destructive/90": variant === "destructive",
-            "border border-border bg-background hover:bg-secondary hover:text-secondary-foreground": variant === "outline",
-            "bg-secondary text-secondary-foreground hover:bg-secondary/80": variant === "secondary",
-            "hover:bg-secondary hover:text-secondary-foreground": variant === "ghost",
+            "bg-primary text-primary-foreground hover:bg-primary/90 shadow-sm shadow-primary/20": variant === "default",
+            "bg-destructive text-destructive-foreground hover:bg-destructive/90 shadow-sm": variant === "destructive",
+            "border border-border/60 bg-transparent hover:bg-secondary/60 hover:text-secondary-foreground backdrop-blur-sm": variant === "outline",
+            "bg-secondary/80 text-secondary-foreground hover:bg-secondary backdrop-blur-sm": variant === "secondary",
+            "hover:bg-secondary/60 hover:text-secondary-foreground": variant === "ghost",
             "text-primary underline-offset-4 hover:underline": variant === "link",
-            "h-10 px-4 py-2": size === "default",
-            "h-9 rounded-md px-3": size === "sm",
-            "h-11 rounded-md px-8": size === "lg",
+            "h-10 px-5 py-2": size === "default",
+            "h-9 rounded-lg px-4": size === "sm",
+            "h-12 rounded-2xl px-8 text-base": size === "lg",
             "h-10 w-10": size === "icon",
           },
           className

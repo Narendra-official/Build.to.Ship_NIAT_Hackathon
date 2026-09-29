@@ -9,32 +9,30 @@ export default function LandingPage() {
   return (
     <div className="min-h-screen bg-background text-foreground transition-colors duration-300 relative overflow-hidden flex flex-col">
       {/* Sophisticated Ambient Background */}
-      <div className="fixed inset-0 pointer-events-none -z-10">
-        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-primary/10 blur-[120px]" />
-        <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] rounded-full bg-blue-500/10 blur-[150px]" />
-        <div className="absolute top-[40%] right-[10%] w-[30%] h-[30%] rounded-full bg-emerald-500/5 blur-[100px]" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,hsl(var(--background))_100%)] opacity-50" />
+      <div className="fixed inset-0 pointer-events-none -z-10 bg-background/50">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(var(--primary),0.03)_0%,transparent_50%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,rgba(0,0,0,0.02)_0%,transparent_50%)] dark:bg-[radial-gradient(ellipse_at_bottom_left,rgba(255,255,255,0.02)_0%,transparent_50%)]" />
       </div>
 
       {/* Navigation */}
-      <nav className="flex items-center justify-between px-6 sm:px-10 py-6 max-w-7xl mx-auto w-full glass-elevated sticky top-4 z-50 rounded-full border border-border/50 shadow-lg shadow-black/5 mt-4">
-        <div className="flex items-center space-x-3 group">
-          <div className="w-10 h-10 bg-gradient-to-br from-primary to-emerald-600 rounded-xl flex items-center justify-center shadow-lg shadow-primary/20 transition-transform group-hover:scale-105">
-            <Building className="w-6 h-6 text-white" />
+      <nav className="flex items-center justify-between px-6 sm:px-10 py-4 max-w-7xl mx-auto w-full glass sticky top-4 z-50 rounded-2xl border border-border/40 shadow-sm mt-4">
+        <div className="flex items-center space-x-2.5 group">
+          <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center shadow-sm shadow-primary/20 transition-transform group-hover:scale-105">
+            <Building className="w-4 h-4 text-primary-foreground" />
           </div>
-          <span className="text-2xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-foreground to-foreground/70">
+          <span className="text-xl font-semibold tracking-tight text-foreground">
             WattWise
           </span>
         </div>
         <div className="flex items-center space-x-4 sm:space-x-6">
-          <button onClick={toggleTheme} className="p-2 rounded-full hover:bg-secondary/80 text-muted-foreground hover:text-foreground transition-colors glass-secondary">
-            {theme === 'dark' ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+          <button onClick={toggleTheme} className="p-2 rounded-md hover:bg-foreground/5 text-muted-foreground hover:text-foreground transition-colors">
+            {theme === 'dark' ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
           </button>
           <Link to="/login" className="text-sm font-semibold text-muted-foreground hover:text-foreground transition-colors hidden sm:block">
             Log in
           </Link>
           <Link to="/register">
-            <Button className="rounded-full shadow-lg shadow-primary/20 hover:shadow-primary/40 transition-shadow bg-foreground text-background hover:bg-foreground/90 font-bold px-6">
+            <Button className="rounded-xl shadow-sm bg-foreground text-background hover:bg-foreground/90 font-semibold px-5">
               Get Started
             </Button>
           </Link>
@@ -71,9 +69,9 @@ export default function LandingPage() {
           </div>
           
           <div className="relative z-10 animate-fade-in-up stagger-2">
-            <div className="absolute inset-0 bg-gradient-to-tr from-emerald-500/20 to-primary/10 rounded-[2.5rem] transform rotate-3 scale-105 -z-10 blur-xl opacity-60"></div>
-            <div className="glass-card p-10 rounded-[2rem] border border-border/50 shadow-2xl relative overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-b from-white/10 to-transparent pointer-events-none"></div>
+            <div className="absolute inset-0 bg-primary/5 rounded-[2.5rem] transform rotate-3 scale-105 -z-10 opacity-60"></div>
+            <div className="glass-card p-10 rounded-3xl border border-border/60 shadow-xl relative overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-b from-white/5 to-transparent pointer-events-none"></div>
               
               <div className="flex items-center justify-between mb-10 border-b border-border/50 pb-6 relative z-10">
                 <div>

@@ -25,64 +25,57 @@ export default function Layout() {
   return (
     <div className="flex flex-col h-screen bg-background relative overflow-hidden text-foreground">
       {/* Sophisticated Ambient Background */}
-      <div className="fixed inset-0 pointer-events-none -z-10">
-        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-primary/10 blur-[120px]" />
-        <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] rounded-full bg-blue-500/10 blur-[150px]" />
-        <div className="absolute top-[40%] right-[10%] w-[30%] h-[30%] rounded-full bg-emerald-500/5 blur-[100px]" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,hsl(var(--background))_100%)] opacity-50" />
+      <div className="fixed inset-0 pointer-events-none -z-10 bg-background/50">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(var(--primary),0.03)_0%,transparent_50%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,rgba(0,0,0,0.02)_0%,transparent_50%)] dark:bg-[radial-gradient(ellipse_at_bottom_left,rgba(255,255,255,0.02)_0%,transparent_50%)]" />
       </div>
 
       {/* Top Header */}
-      <header className="h-[72px] glass-elevated border-b border-border/50 flex items-center justify-between px-6 sm:px-8 sticky top-0 z-40">
+      <header className="h-16 glass sticky top-0 z-40 border-b border-border/40 px-6 sm:px-8 flex items-center justify-between">
         <div className="flex items-center space-x-8">
-          <Link to="/dashboard" className="flex items-center space-x-3 group">
-            <div className="w-9 h-9 bg-gradient-to-br from-primary to-emerald-600 rounded-xl flex items-center justify-center shadow-lg shadow-primary/20 transition-transform group-hover:scale-105">
-              <Building2 className="w-5 h-5 text-white" />
+          <Link to="/dashboard" className="flex items-center space-x-2.5 group">
+            <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center shadow-sm shadow-primary/20 transition-transform group-hover:scale-105">
+              <Building2 className="w-4 h-4 text-primary-foreground" />
             </div>
-            <span className="text-xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-foreground to-foreground/70 hidden sm:block">
+            <span className="text-lg font-semibold tracking-tight text-foreground hidden sm:block">
               WattWise
             </span>
           </Link>
           
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-1">
+          <nav className="hidden md:flex items-center space-x-2">
             {navItems.map((item) => {
               const isActive = location.pathname === item.path;
               return (
                 <Link
                   key={item.name}
                   to={item.path}
-                  className={`px-4 py-2 rounded-full transition-all duration-300 text-sm font-medium relative ${
+                  className={`px-3 py-1.5 rounded-md transition-all duration-300 text-sm font-medium flex items-center space-x-2 ${
                     isActive
-                      ? "text-primary bg-primary/10"
-                      : "text-muted-foreground hover:bg-secondary/80 hover:text-foreground"
+                      ? "bg-foreground/5 text-foreground shadow-sm"
+                      : "text-muted-foreground hover:bg-foreground/5 hover:text-foreground"
                   }`}
                 >
-                  <div className="flex items-center space-x-2">
-                    <item.icon className={`w-4 h-4 ${isActive ? 'text-primary' : 'opacity-70'}`} />
-                    <span>{item.name}</span>
-                  </div>
-                  {isActive && (
-                    <span className="absolute bottom-[-16px] left-1/2 -translate-x-1/2 w-8 h-1 bg-primary rounded-t-full shadow-[0_0_8px_rgba(var(--primary),0.5)]" />
-                  )}
+                  <item.icon className={`w-4 h-4 ${isActive ? 'text-primary' : 'opacity-70'}`} />
+                  <span>{item.name}</span>
                 </Link>
               );
             })}
           </nav>
         </div>
 
-        <div className="flex items-center space-x-3 sm:space-x-4">
-          <button onClick={toggleTheme} className="p-2 rounded-full hover:bg-secondary/80 text-muted-foreground hover:text-foreground transition-colors glass-secondary">
-            {theme === 'dark' ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+        <div className="flex items-center space-x-2 sm:space-x-3">
+          <button onClick={toggleTheme} className="p-2 rounded-md hover:bg-foreground/5 text-muted-foreground hover:text-foreground transition-colors">
+            {theme === 'dark' ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
           </button>
           
           {/* Profile Dropdown */}
           <div className="relative hidden md:block">
             <button 
               onClick={() => setProfileOpen(!profileOpen)}
-              className="flex items-center space-x-2 p-1 pr-3 rounded-full hover:bg-secondary/50 transition-all border border-transparent hover:border-border glass-secondary"
+              className="flex items-center space-x-2 p-1.5 pr-3 rounded-md hover:bg-foreground/5 transition-all border border-transparent"
             >
-              <div className="w-8 h-8 rounded-full bg-gradient-to-br from-primary to-blue-500 text-white flex items-center justify-center font-bold text-sm shadow-sm">
+              <div className="w-7 h-7 rounded-md bg-primary/10 text-primary flex items-center justify-center font-semibold text-xs border border-primary/20">
                 {user?.name?.charAt(0).toUpperCase() || 'U'}
               </div>
               <span className="text-sm font-medium text-foreground">{user?.name}</span>
@@ -91,20 +84,20 @@ export default function Layout() {
             {profileOpen && (
               <>
                 <div className="fixed inset-0 z-40" onClick={() => setProfileOpen(false)}></div>
-                <div className="absolute right-0 mt-3 w-64 bg-background/95 backdrop-blur-xl rounded-2xl shadow-2xl border border-border/50 z-50 overflow-hidden transform origin-top-right transition-all">
-                  <div className="px-4 py-4 border-b border-border/50 bg-secondary/30">
+                <div className="absolute right-0 mt-2 w-56 glass-elevated rounded-xl shadow-xl border border-border/50 z-50 overflow-hidden transform origin-top-right transition-all">
+                  <div className="px-4 py-3 border-b border-border/50 bg-foreground/5">
                     <p className="text-sm font-semibold text-foreground truncate">{user?.name}</p>
                     <p className="text-xs text-muted-foreground truncate mt-0.5">{user?.email}</p>
                   </div>
-                  <div className="py-2">
-                    <Link onClick={() => setProfileOpen(false)} to="/profile" className="flex items-center px-4 py-2 text-sm text-muted-foreground hover:text-foreground hover:bg-secondary/50 transition-colors">
+                  <div className="py-1">
+                    <Link onClick={() => setProfileOpen(false)} to="/profile" className="flex items-center px-4 py-2 text-sm text-muted-foreground hover:text-foreground hover:bg-foreground/5 transition-colors">
                       <UserIcon className="w-4 h-4 mr-3" /> Profile
                     </Link>
-                    <Link onClick={() => setProfileOpen(false)} to="/settings" className="flex items-center px-4 py-2 text-sm text-muted-foreground hover:text-foreground hover:bg-secondary/50 transition-colors">
+                    <Link onClick={() => setProfileOpen(false)} to="/settings" className="flex items-center px-4 py-2 text-sm text-muted-foreground hover:text-foreground hover:bg-foreground/5 transition-colors">
                       <Settings className="w-4 h-4 mr-3" /> Settings
                     </Link>
                   </div>
-                  <div className="py-2 border-t border-border/50">
+                  <div className="py-1 border-t border-border/50">
                     <button onClick={() => { setProfileOpen(false); handleLogout(); }} className="flex w-full items-center px-4 py-2 text-sm text-destructive hover:bg-destructive/10 transition-colors">
                       <LogOut className="w-4 h-4 mr-3" /> Logout
                     </button>
@@ -115,7 +108,7 @@ export default function Layout() {
           </div>
           
           {/* Mobile Menu Toggle */}
-          <button className="md:hidden p-2 text-muted-foreground hover:text-foreground glass-secondary rounded-full" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
+          <button className="md:hidden p-2 text-muted-foreground hover:text-foreground rounded-md hover:bg-foreground/5" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
             <Menu className="w-5 h-5" />
           </button>
         </div>
