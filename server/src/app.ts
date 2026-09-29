@@ -30,14 +30,16 @@ app.use('/api/history', analysisRoutes);
 app.use('/api/analytics', analysisRoutes); // Alias for analytics
 app.use('/api/analysis', analysisRoutes); // Alias for frontend API
 
-// Serve frontend static files in production
-if (config.nodeEnv === 'production') {
-  const clientBuildPath = path.join(__dirname, '../../client/dist');
-  app.use(express.static(clientBuildPath));
-  app.get('/(.*)', (req, res) => {
-    res.sendFile(path.join(clientBuildPath, 'index.html'));
+// 404 handler for API routes
+app.use((req, res) => {
+  res.status(404).json({
+    success: false,
+    error: {
+      code: 'NOT_FOUND',
+      message: 'Route not found'
+    }
   });
-}
+});
 
 // Error handling must be last
 app.use(errorHandler);
