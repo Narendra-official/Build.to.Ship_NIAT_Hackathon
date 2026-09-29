@@ -18,7 +18,7 @@ export default function Register() {
     e.preventDefault();
     setError('');
 
-    if (formData.password.length < 6) return setError('Password must be at least 6 characters.');
+    if (formData.password.length < 8) return setError('Password must be at least 8 characters.');
     if (formData.password !== formData.confirmPassword) return setError('Passwords do not match.');
 
     setIsSubmitting(true);
@@ -28,7 +28,11 @@ export default function Register() {
       toast.success('Enterprise account initialized successfully.');
       navigate('/login');
     } catch (err: any) {
-      setError(err.response?.data?.error?.message || err.response?.data?.error || 'Account initialization failed. Please contact support.');
+      if (err.message === 'Network Error') {
+        setError('Network Error: The backend server is unreachable. Please check if the server is running or if there is a CORS issue.');
+      } else {
+        setError(err.response?.data?.error?.message || err.response?.data?.error || 'Account initialization failed. Please contact support.');
+      }
     } finally {
       setIsSubmitting(false);
     }
