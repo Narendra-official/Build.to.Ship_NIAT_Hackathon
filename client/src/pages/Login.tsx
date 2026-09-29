@@ -18,6 +18,8 @@ export default function Login() {
   const [forgotMode, setForgotMode] = useState(false);
   const [resetEmail, setResetEmail] = useState('');
 
+  const [isFocused, setIsFocused] = useState(false);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
@@ -42,9 +44,9 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen bg-background relative flex flex-col justify-center py-12 sm:px-6 lg:px-8 overflow-hidden transition-colors duration-300">
+    <div className={`min-h-screen relative flex flex-col justify-center py-12 sm:px-6 lg:px-8 overflow-hidden transition-colors duration-300 ${isFocused ? 'bg-slate-100 dark:bg-zinc-950' : 'bg-background'}`}>
       {/* Sophisticated Ambient Background */}
-      <div className="fixed inset-0 pointer-events-none -z-10 bg-background/50">
+      <div className={`fixed inset-0 pointer-events-none -z-10 transition-opacity duration-300 ${isFocused ? 'opacity-0' : 'opacity-100 bg-background/50'}`}>
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(var(--primary),0.03)_0%,transparent_50%)]" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,rgba(0,0,0,0.02)_0%,transparent_50%)] dark:bg-[radial-gradient(ellipse_at_bottom_left,rgba(255,255,255,0.02)_0%,transparent_50%)]" />
       </div>
@@ -70,8 +72,16 @@ export default function Login() {
         </p>
       </div>
 
-      <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md z-10 animate-fade-in-up stagger-2">
-        <div className="glass-card py-10 px-4 sm:px-12 rounded-3xl border border-border/60 shadow-xl relative overflow-hidden">
+      <div 
+        className="mt-8 sm:mx-auto sm:w-full sm:max-w-md z-10 animate-fade-in-up stagger-2"
+        onFocus={() => setIsFocused(true)}
+        onBlur={(e) => {
+          if (!e.currentTarget.contains(e.relatedTarget)) {
+            setIsFocused(false);
+          }
+        }}
+      >
+        <div className={`py-10 px-4 sm:px-12 rounded-3xl border border-border/60 relative overflow-hidden transition-all duration-300 ${isFocused ? 'bg-white dark:bg-zinc-900 shadow-2xl scale-[1.01]' : 'glass-card shadow-xl'}`}>
           <div className="absolute inset-0 bg-gradient-to-b from-white/5 to-transparent pointer-events-none"></div>
           
           {error && (
