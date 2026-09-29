@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "../components/ui/Card";
+import { Card, CardContent, CardTitle, CardDescription } from "../components/ui/Card";
 import { Button } from "../components/ui/Button";
 import { Zap, TrendingDown, TrendingUp, Leaf, AlertCircle, Droplets, Trash2, Plus, ArrowRight, Activity, BarChart2, CalendarClock, ShieldCheck } from "lucide-react";
-import { XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, AreaChart, Area, Legend } from 'recharts';
+import { XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, AreaChart, Area } from 'recharts';
 import { useApp } from '../lib/store';
 import type { Analysis } from '../lib/store';
 import NewAnalysisModal from '../components/NewAnalysisModal';
