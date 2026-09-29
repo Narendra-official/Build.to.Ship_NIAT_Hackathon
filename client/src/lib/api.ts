@@ -31,14 +31,40 @@ export const auth = {
   }
 };
 
+const formatAnalysis = (a: any) => ({
+  id: a.id,
+  name: `Analysis #${(a.id || 'xxxx').substring(0, 4).toUpperCase()}`,
+  building: 'HQ - Building A',
+  target: 'Emissions',
+  status: 'Completed',
+  date: new Date(a.created_at || Date.now()).toLocaleDateString(),
+  inputs: {
+    electricity: a.energy_records?.amount || "0",
+    water: "0",
+    waste: "0"
+  },
+  result: {
+    energyAnalysis: a.summary || '',
+    waterAnalysis: '',
+    wasteAnalysis: '',
+    unusualPatterns: [],
+    possibleCauses: [],
+    sustainabilityProblems: a.findings?.map((f:any) => f.description) || [],
+    aiRecommendations: a.recommendations?.map((r:any) => r.action || r.title) || [],
+    estimatedCostSavings: Math.floor(Math.random() * 500) + 100, // mock cost savings
+    estimatedCO2Reduction: a.footprint_kg_co2 || 0,
+    resourceSavingOpportunities: []
+  }
+});
+
 export const analysis = {
   fetchAnalyses: async () => {
     const res = await api.get('/analysis');
-    return res.data.data;
+    return (res.data.data || []).map(formatAnalysis);
   },
   runAnalysis: async (data: any) => {
     const res = await api.post('/analysis/run', data);
-    return res.data.data;
+    return formatAnalysis(res.data.data);
   },
   deleteAnalysis: async (id: string) => {
     const res = await api.delete(`/analysis/${id}`);
