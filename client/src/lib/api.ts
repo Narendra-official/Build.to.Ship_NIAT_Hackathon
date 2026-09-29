@@ -36,7 +36,7 @@ const formatAnalysis = (a: any) => ({
   name: `Analysis #${(a.id || 'xxxx').substring(0, 4).toUpperCase()}`,
   building: 'HQ - Building A',
   target: 'Emissions',
-  status: 'Completed',
+  status: 'Completed' as const,
   date: new Date(a.created_at || Date.now()).toLocaleDateString(),
   inputs: {
     electricity: a.energy_records?.amount || "0",
