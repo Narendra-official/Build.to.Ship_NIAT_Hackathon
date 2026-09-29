@@ -11,8 +11,14 @@ import { errorHandler } from './middleware/errorHandler';
 const app = express();
 
 // Middleware
+const allowedOrigins = [
+  config.clientUrl,
+  config.clientUrl?.replace(/\/$/, ''),
+  'http://localhost:5173'
+].filter(Boolean) as string[];
+
 const corsOptions = {
-  origin: config.nodeEnv === 'production' ? config.clientUrl : 'http://localhost:5173',
+  origin: allowedOrigins,
   credentials: true
 };
 app.use(cors(corsOptions));
