@@ -1,6 +1,7 @@
 import { Leaf, TreePine, Sun, Wind } from "lucide-react";
 import { Card, CardContent } from "../components/ui/Card";
 import { Button } from "../components/ui/Button";
+import { toast } from "sonner";
 
 export default function Offsets() {
   return (
@@ -47,7 +48,10 @@ export default function Offsets() {
                     <p className="text-sm font-semibold text-primary mt-2">{project.price}</p>
                   </div>
                 </div>
-                <Button className="shrink-0 ml-4 rounded-xl font-bold shadow-md">
+                <Button 
+                  onClick={() => toast.success(`Successfully purchased carbon credits for ${project.title}. Thank you for contributing to Net Zero!`)}
+                  className="shrink-0 ml-4 rounded-xl font-bold shadow-md"
+                >
                   Purchase Credits
                 </Button>
               </CardContent>

@@ -1,5 +1,6 @@
 import { Wrench, AlertTriangle, CheckCircle2, ShieldAlert } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "../components/ui/Card";
+import { toast } from "sonner";
 
 export default function HardwareHealth() {
   const equipment = [
@@ -41,7 +42,10 @@ export default function HardwareHealth() {
                   </div>
                 </div>
                 {item.status !== 'healthy' && (
-                  <button className="px-5 py-2 rounded-xl text-sm font-bold bg-foreground text-background hover:bg-foreground/90 transition-colors shadow-md">
+                  <button 
+                    onClick={() => toast.success(`Service scheduled for ${item.name}. Maintenance team notified.`)}
+                    className="px-5 py-2 rounded-xl text-sm font-bold bg-foreground text-background hover:bg-foreground/90 transition-colors shadow-md"
+                  >
                     Schedule Service
                   </button>
                 )}
