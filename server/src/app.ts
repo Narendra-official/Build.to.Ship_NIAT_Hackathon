@@ -34,7 +34,7 @@ app.use('/api/analysis', analysisRoutes); // Alias for frontend API
 if (config.nodeEnv === 'production') {
   const clientBuildPath = path.join(__dirname, '../../client/dist');
   app.use(express.static(clientBuildPath));
-  app.get('*', (req, res) => {
+  app.get('/(.*)', (req, res) => {
     res.sendFile(path.join(clientBuildPath, 'index.html'));
   });
 }
