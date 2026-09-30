@@ -1,5 +1,7 @@
 # AI-Powered Sustainability Solution: Energy Optimizer
 
+🚀 **[Live Demo: Energy Optimizer](https://build-to-ship-niat-hackathon.vercel.app/)**
+
 ## Problem Statement
 Small to medium businesses often struggle to monitor, understand, and reduce their energy usage and carbon footprint. They lack the resources to hire dedicated sustainability experts.
 
@@ -57,8 +59,11 @@ Run the SQL script located at `supabase/migrations/001_initial_schema.sql` in yo
 - `GET /api/history` - Retrieve all analyses and linked records
 - `GET /api/health` - Server health check
 
+## Live Demo
+Check out the live application here: **[Energy Optimizer](https://build-to-ship-niat-hackathon.vercel.app/)**
+
 ## Deployment
-This backend is configured for deployment on platforms like Render. It relies on standard environment variables and runs with `npm start` (using `dist/server.js`).
+This full-stack application is deployed on Vercel. It relies on standard environment variables for configuration.
 
 ## Demo Workflow
 1. Register a new user.
